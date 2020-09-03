@@ -1,5 +1,5 @@
-name: IBM Cloud Auto Restart
-# 更新一下
+name: IBM Cloud Auto Restart - 28
+
 on:
   push:
     branches: [ master ]
@@ -20,24 +20,24 @@ jobs:
         chmod -R 777 ./IBM_Cloud_CLI/
     - name: Login IBM Cloud
       env:
-        IBM_ACCOUNT: ${{ secrets.IBM_ACCOUNT }}
-        REGION_NUM: ${{ secrets.REGION_NUM }}
+        IBM_ACCOUNT: ${{ secrets.IBM_ACCOUNT_28 }}
+        REGION_NUM: ${{ secrets.REGION_NUM_28 }}
       run: |
         ./IBM_Cloud_CLI/ibmcloud login <<EOF
-        $IBM_ACCOUNT
-        $REGION_NUM
+        $IBM_ACCOUNT_28
+        $REGION_NUM_28
         no
         EOF
     - name: Target IBM Cloud
       env:
         RESOURSE_ID: ${{ secrets.RESOURSE_ID }}
       run: |
-        ./IBM_Cloud_CLI/ibmcloud target -g "$RESOURSE_ID"
+        ./IBM_Cloud_CLI/ibmcloud target -g "$RESOURSE_ID_28"
         ./IBM_Cloud_CLI/ibmcloud target --cf
         ./IBM_Cloud_CLI/ibmcloud cf install -f -v 6.51.0
     - name: Restart IBM Cloud
       env:
-        IBM_APP_NAME: ${{ secrets.IBM_APP_NAME }}
+        IBM_APP_NAME: ${{ secrets.IBM_APP_NAME_28 }}
       run: |
-        ./IBM_Cloud_CLI/ibmcloud cf restart "$IBM_APP_NAME"
+        ./IBM_Cloud_CLI/ibmcloud cf restart "$IBM_APP_NAME_28"
 
